@@ -105,7 +105,7 @@ export default function AdvancedHotelCommentsApp() {
         <div className="container mx-auto px-4 text-center relative z-10">
           <h3 className="text-5xl font-bold mb-6">🚀 Hazır mısınız?</h3>
           <p className="text-2xl mb-8 opacity-90">
-            Binlerce otel sahibi zaten HotelComments kullanıyor.
+            Binlerce otel sahibi zaten Hotalyze kullanıyor.
             <br />
             <strong>Siz de bu başarı hikayesinin parçası olun! ⭐</strong>
           </p>

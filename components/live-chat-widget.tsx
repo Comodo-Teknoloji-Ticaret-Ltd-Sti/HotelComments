@@ -18,7 +18,7 @@ export function LiveChatWidget() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      text: "Merhaba! HotelComments'e hoş geldiniz! 👋 Size nasıl yardımcı olabilirim?",
+      text: "Merhaba! Hotalyze'a hoş geldiniz! 👋 Size nasıl yardımcı olabilirim?",
       sender: "bot",
       timestamp: new Date(),
     },
@@ -135,9 +135,8 @@ export function LiveChatWidget() {
                     className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}
                   >
                     <div
-                      className={`max-w-xs px-3 py-2 rounded-lg text-sm ${
-                        message.sender === "user" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-800"
-                      }`}
+                      className={`max-w-xs px-3 py-2 rounded-lg text-sm ${message.sender === "user" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-800"
+                        }`}
                     >
                       {message.text}
                     </div>

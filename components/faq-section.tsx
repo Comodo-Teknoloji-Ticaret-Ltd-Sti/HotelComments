@@ -20,9 +20,9 @@ export function FAQSection() {
   const faqs: FAQ[] = [
     {
       id: 1,
-      question: "HotelComments nasıl çalışır?",
+      question: "Hotalyze nasıl çalışır?",
       answer:
-        "HotelComments, otellerin çeşitli platformlardaki yorumlarını toplar ve yapay zeka teknolojisi kullanarak analiz eder. Sentiment analizi, departman bazlı kategorilendirme ve rekabet analizi gibi özelliklerle işletmenizin güçlü ve zayıf yönlerini belirler.",
+        "Hotalyze, otellerin çeşitli platformlardaki yorumlarını toplar ve yapay zeka teknolojisi kullanarak analiz eder. Sentiment analizi, departman bazlı kategorilendirme ve rekabet analizi gibi özelliklerle işletmenizin güçlü ve zayıf yönlerini belirler.",
       category: "general",
     },
     {
@@ -121,9 +121,8 @@ export function FAQSection() {
                 key={category.id}
                 variant={selectedCategory === category.id ? "default" : "outline"}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`${
-                  selectedCategory === category.id ? "bg-blue-500 text-white" : "text-gray-600 hover:text-blue-600"
-                }`}
+                className={`${selectedCategory === category.id ? "bg-blue-500 text-white" : "text-gray-600 hover:text-blue-600"
+                  }`}
               >
                 {category.name}
                 <Badge variant="secondary" className="ml-2">

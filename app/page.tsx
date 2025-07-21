@@ -127,7 +127,7 @@ const HotelCommentsApp = () => {
       company: "Antalya Palace Hotel",
       image: "/placeholder.svg?height=60&width=60&text=MÖ",
       content:
-        "HotelComments sayesinde müşteri memnuniyetimizi %35 artırdık. Artık hangi alanlarda iyileştirme yapmamız gerektiğini tam olarak biliyoruz.",
+        "Hotalyze sayesinde müşteri memnuniyetimizi %35 artırdık. Artık hangi alanlarda iyileştirme yapmamız gerektiğini tam olarak biliyoruz.",
       rating: 5,
       results: "+35% Müşteri Memnuniyeti",
     },
@@ -690,7 +690,7 @@ const HotelCommentsApp = () => {
                 <Card>
                   <CardHeader>
                     <CardTitle>ROI Analizi - Gelir Artışı</CardTitle>
-                    <CardDescription>HotelComments kullanmaya başladıktan sonraki gelir değişimi</CardDescription>
+                    <CardDescription>Hotalyze kullanmaya başladıktan sonraki gelir değişimi</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="h-[400px]">
@@ -837,7 +837,7 @@ const HotelCommentsApp = () => {
                 <BarChart3 className="text-white w-6 h-6" />
               </div>
               <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                HotelComments
+                Hotalyze
               </h1>
               <Badge variant="secondary" className="bg-green-100 text-green-800">
                 AI Powered
@@ -1236,7 +1236,7 @@ const HotelCommentsApp = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-blue-100 text-blue-800">⚡ Özellikler</Badge>
-            <h3 className="text-4xl font-bold text-gray-800 mb-4">Neden HotelComments?</h3>
+            <h3 className="text-4xl font-bold text-gray-800 mb-4">Neden Hotalyze?</h3>
             <p className="text-xl text-gray-600">Sektörde öncü teknolojiler ile fark yaratıyoruz</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -1293,7 +1293,7 @@ const HotelCommentsApp = () => {
         <div className="container mx-auto px-4 text-center">
           <h3 className="text-4xl font-bold mb-6">🚀 Hemen Başlayın, Farkı Görün!</h3>
           <p className="text-xl mb-8 opacity-90">
-            Binlerce otel sahibi zaten HotelComments kullanıyor. Siz de geride kalmayın!
+            Binlerce otel sahibi zaten Hotalyze kullanıyor. Siz de geride kalmayın!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
@@ -1324,7 +1324,7 @@ const HotelCommentsApp = () => {
             <div>
               <div className="flex items-center space-x-2 mb-4">
                 <BarChart3 className="text-blue-400 w-6 h-6" />
-                <span className="text-xl font-bold">HotelComments</span>
+                <span className="text-xl font-bold">Hotalyze</span>
               </div>
               <p className="text-gray-400 mb-4">
                 Otel yorumlarını analiz ederek işletmenizin büyümesine katkıda bulunuyoruz.
@@ -1357,7 +1357,7 @@ const HotelCommentsApp = () => {
               <ul className="space-y-2 text-gray-400">
                 <li className="flex items-center">
                   <Mail className="w-4 h-4 mr-2" />
-                  info@hotelcomments.com
+                  info@hotalyze.com
                 </li>
                 <li className="flex items-center">
                   <Phone className="w-4 h-4 mr-2" />
@@ -1371,7 +1371,7 @@ const HotelCommentsApp = () => {
             </div>
           </div>
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 HotelComments. Tüm hakları saklıdır. 🇹🇷 Türkiye'de tasarlandı.</p>
+            <p>&copy; 2025 Hotalyze. Tüm hakları saklıdır. 🇹🇷 Türkiye'de tasarlandı.</p>
           </div>
         </div>
       </footer>

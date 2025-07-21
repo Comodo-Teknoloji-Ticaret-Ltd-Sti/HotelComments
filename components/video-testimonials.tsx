@@ -35,7 +35,7 @@ export function VideoTestimonials() {
       result: "+45% Gelir Artışı",
       rating: 5,
       quote:
-        "HotelComments sayesinde 6 ayda gelirimi %45 artırdım. Müşteri yorumlarını analiz etmek hiç bu kadar kolay olmamıştı!",
+        "Hotalyze sayesinde 6 ayda gelirimi %45 artırdım. Müşteri yorumlarını analiz etmek hiç bu kadar kolay olmamıştı!",
     },
     {
       id: 2,
