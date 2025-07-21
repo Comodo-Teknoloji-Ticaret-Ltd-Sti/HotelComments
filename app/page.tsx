@@ -848,10 +848,30 @@ const HotelCommentsApp = () => {
                 <PlayCircle className="w-4 h-4 mr-2" />
                 Demo
               </Button>
-              <a href="#analysis" className="text-gray-600 hover:text-blue-600 font-medium flex items-center">
+              <a
+                href="#analysis"
+                className="text-gray-600 hover:text-blue-600 font-medium flex items-center"
+                onClick={e => {
+                  e.preventDefault();
+                  const el = document.getElementById("analysis");
+                  if (el) {
+                    el.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+              >
                 Analizler
               </a>
-              <a href="#packages" className="text-gray-600 hover:text-blue-600 font-medium flex items-center">
+              <a
+                href="#packages"
+                className="text-gray-600 hover:text-blue-600 font-medium flex items-center"
+                onClick={e => {
+                  e.preventDefault();
+                  const el = document.getElementById("packages");
+                  if (el) {
+                    el.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+              >
                 Fiyatlar
               </a>
               <Button size="sm" className="bg-gradient-to-r from-blue-500 to-purple-600">
