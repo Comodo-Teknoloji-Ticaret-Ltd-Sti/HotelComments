@@ -54,6 +54,13 @@ import {
   Legend,
 } from "recharts"
 
+// Github Pages basePath desteği için asset yolunu otomatik ekleyen fonksiyon
+const getAssetPath = (path: string) => {
+  const base = process.env.NEXT_PUBLIC_BASE_PATH || '/HotelComments';
+  if (path.startsWith('/')) return `${base}${path}`;
+  return `${base}/${path}`;
+};
+
 const HotelCommentsApp = () => {
   const [selectedPackage, setSelectedPackage] = useState(null)
   const [showPurchaseForm, setShowPurchaseForm] = useState(false)
@@ -126,7 +133,7 @@ const HotelCommentsApp = () => {
       name: "Mehmet Özkan",
       role: "Genel Müdür",
       company: "Antalya Palace Hotel",
-      image: "/placeholder.svg?height=60&width=60&text=MÖ",
+      image: getAssetPath("/placeholder.svg?height=60&width=60&text=MÖ"),
       content:
         "Hotalyze sayesinde müşteri memnuniyetimizi %35 artırdık. Artık hangi alanlarda iyileştirme yapmamız gerektiğini tam olarak biliyoruz.",
       rating: 5,
@@ -136,7 +143,7 @@ const HotelCommentsApp = () => {
       name: "Ayşe Demir",
       role: "Pazarlama Direktörü",
       company: "Bodrum Resort & Spa",
-      image: "/placeholder.svg?height=60&width=60&text=AD",
+      image: getAssetPath("/placeholder.svg?height=60&width=60&text=AD"),
       content:
         "Rakip analizi özelliği sayesinde pazardaki konumumuzu net olarak görebiliyoruz. ROI'mız 3 ay içinde %250 arttı.",
       rating: 5,
@@ -146,7 +153,7 @@ const HotelCommentsApp = () => {
       name: "Can Yılmaz",
       role: "İşletme Sahibi",
       company: "Kapadokya Cave Hotel",
-      image: "/placeholder.svg?height=60&width=60&text=CY",
+      image: getAssetPath("/placeholder.svg?height=60&width=60&text=CY"),
       content:
         "Daha önce yorumları tek tek okumak zorundaydık. Şimdi tüm insights'ları dakikalar içinde alıyoruz. Zaman tasarrufu inanılmaz!",
       rating: 5,
@@ -155,11 +162,11 @@ const HotelCommentsApp = () => {
   ]
 
   const clientLogos = [
-    { name: "Hilton", logo: "/placeholder.svg?height=40&width=120&text=HILTON" },
-    { name: "Marriott", logo: "/placeholder.svg?height=40&width=120&text=MARRIOTT" },
-    { name: "Radisson", logo: "/placeholder.svg?height=40&width=120&text=RADISSON" },
-    { name: "Sheraton", logo: "/placeholder.svg?height=40&width=120&text=SHERATON" },
-    { name: "Hyatt", logo: "/placeholder.svg?height=40&width=120&text=HYATT" },
+    { name: "Hilton", logo: getAssetPath("/placeholder.svg?height=40&width=120&text=HILTON") },
+    { name: "Marriott", logo: getAssetPath("/placeholder.svg?height=40&width=120&text=MARRIOTT") },
+    { name: "Radisson", logo: getAssetPath("/placeholder.svg?height=40&width=120&text=RADISSON") },
+    { name: "Sheraton", logo: getAssetPath("/placeholder.svg?height=40&width=120&text=SHERATON") },
+    { name: "Hyatt", logo: getAssetPath("/placeholder.svg?height=40&width=120&text=HYATT") },
   ]
 
   const demoData = [
@@ -807,6 +814,8 @@ const HotelCommentsApp = () => {
                             <div className="flex items-center space-x-3">
                               <Avatar className="w-10 h-10">
                                 <AvatarFallback>{review.User.slice(0, 2)}</AvatarFallback>
+                                {/* Eğer ileride review.User görseli eklenirse: */}
+                                {/* <AvatarImage src={getAssetPath('/placeholder-user.jpg')} /> */}
                               </Avatar>
                               <div>
                                 <div className="font-medium">{review.User}</div>
