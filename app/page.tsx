@@ -77,7 +77,8 @@ const HotelCommentsApp = () => {
     phone: "",
     packageId: "",
   })
-
+  // DEĞIŞEN:
+  const [activeTab, setActiveTab] = useState("overview")
   // Countdown timer effect
   useEffect(() => {
     const timer = setInterval(() => {
@@ -366,7 +367,10 @@ const HotelCommentsApp = () => {
     e.preventDefault()
     alert(`${formData.name}, ${selectedPackage.name} paketiniz için ödeme sayfasına yönlendiriliyorsunuz!`)
   }
-
+  const openDemo = () => {
+    setActiveTab("overview")
+    setShowDemo(true)
+  }
   // Custom Tooltip Component
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
@@ -490,10 +494,7 @@ const HotelCommentsApp = () => {
     </div>
   )
 
-  // DemoModal bileşeninde Tabs için state ekle
   const DemoModal = () => {
-    const [activeTab, setActiveTab] = useState("overview")
-
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
         <div className="bg-white rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto">
@@ -519,7 +520,6 @@ const HotelCommentsApp = () => {
                 <TabsTrigger value="reviews">📝 Yorumlar</TabsTrigger>
               </TabsList>
 
-              {/* TabsContent bileşenlerinin geri kalanı aynı kalacak */}
               <TabsContent value="overview" className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                   <Card className="hover:shadow-lg transition-shadow">
@@ -650,12 +650,75 @@ const HotelCommentsApp = () => {
                     </CardHeader>
                     <CardContent className="space-y-4">
                       {sentimentData.map((item, index) => (
-                        <div key={index} className="space-y-2">
-                          <div className="flex justify-between items-center">
-                            <span className="text-sm font-medium">{item.name}</span>
-                            <span className="text-sm text-gray-600">{item.value}%</span>
+                        <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                          <div className="flex items-center space-x-3">
+                            <div
+                              className="w-4 h-4 rounded-full"
+                              style={{ backgroundColor: item.color }}
+                            ></div>
+                            <span className="font-medium">{item.name}</span>
                           </div>
-                          <Progress value={item.value} className="h-2" />
+                          <div className="text-right">
+                            <div className="text-2xl font-bold">{item.value}%</div>
+                            <Progress value={item.value} className="w-24 mt-2" />
+                          </div>
+                        </div>
+                      ))}
+                      <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+                        <h4 className="font-semibold text-blue-800 mb-2">🎯 AI Önerisi</h4>
+                        <p className="text-blue-700 text-sm">
+                          Pozitif yorumlarınız çok iyi! Ancak negatif yorumların %60'ı "oda temizliği" konusunda.
+                          Bu alana odaklanarak genel memnuniyeti %85'e çıkarabilirsiniz.
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="departments" className="space-y-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Departman Performansı</CardTitle>
+                      <CardDescription>Hangi departmanlar daha iyi performans gösteriyor?</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="h-[300px]">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <BarChart data={departmentData} layout="horizontal">
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis type="number" />
+                            <YAxis dataKey="department" type="category" width={80} />
+                            <Tooltip content={<CustomTooltip />} />
+                            <Bar dataKey="positive" fill="#22c55e" />
+                            <Bar dataKey="negative" fill="#ef4444" />
+                          </BarChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Departman Detayları</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      {departmentData.map((dept, index) => (
+                        <div key={index} className="border rounded-lg p-4">
+                          <div className="flex justify-between items-center mb-2">
+                            <h4 className="font-medium">{dept.department}</h4>
+                            <Badge
+                              variant={dept.positive > 80 ? "default" : dept.positive > 70 ? "secondary" : "destructive"}
+                            >
+                              {dept.positive}% Pozitif
+                            </Badge>
+                          </div>
+                          <Progress value={dept.positive} className="mb-2" />
+                          <div className="text-sm text-gray-600">
+                            {dept.positive > 80 ? "🏆 Mükemmel performans!" :
+                              dept.positive > 70 ? "👍 İyi performans" : "⚠️ İyileştirme gerekli"}
+                          </div>
                         </div>
                       ))}
                     </CardContent>
@@ -663,103 +726,66 @@ const HotelCommentsApp = () => {
                 </div>
               </TabsContent>
 
-              <TabsContent value="departments" className="space-y-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Departman Bazlı Analiz</CardTitle>
-                    <CardDescription>Her departman için pozitif/negatif yorum oranları</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="h-[400px]">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={departmentData}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="department" />
-                          <YAxis />
-                          <Tooltip content={<CustomTooltip />} />
-                          <Bar dataKey="positive" fill="#22c55e" />
-                          <Bar dataKey="negative" fill="#ef4444" />
-                        </BarChart>
-                      </ResponsiveContainer>
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-
               <TabsContent value="roi" className="space-y-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>ROI Analizi - Gelir Artışı</CardTitle>
-                    <CardDescription>Hotalyze kullanmaya başladıktan sonraki gelir değişimi</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="h-[400px]">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={revenueData}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="month" />
-                          <YAxis />
-                          <Tooltip content={<CustomTooltip />} />
-                          <Area
-                            type="monotone"
-                            dataKey="before"
-                            stackId="1"
-                            stroke="#ef4444"
-                            fill="#ef4444"
-                            fillOpacity={0.6}
-                          />
-                          <Area
-                            type="monotone"
-                            dataKey="after"
-                            stackId="2"
-                            stroke="#22c55e"
-                            fill="#22c55e"
-                            fillOpacity={0.8}
-                          />
-                        </AreaChart>
-                      </ResponsiveContainer>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
-                    <CardContent className="p-6">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-                          <TrendingUp className="w-6 h-6 text-white" />
-                        </div>
-                        <div>
-                          <div className="text-2xl font-bold text-green-700">+35%</div>
-                          <div className="text-green-600">Gelir Artışı</div>
-                        </div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Gelir Artışı</CardTitle>
+                      <CardDescription>Analiz öncesi vs sonrası aylık gelir karşılaştırması</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="h-[300px]">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <AreaChart data={revenueData}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="month" />
+                            <YAxis />
+                            <Tooltip content={<CustomTooltip />} />
+                            <Area type="monotone" dataKey="before" stackId="1" stroke="#94a3b8" fill="#94a3b8" />
+                            <Area type="monotone" dataKey="after" stackId="2" stroke="#22c55e" fill="#22c55e" />
+                          </AreaChart>
+                        </ResponsiveContainer>
                       </div>
                     </CardContent>
                   </Card>
 
-                  <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
-                    <CardContent className="p-6">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
-                          <Users className="w-6 h-6 text-white" />
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>ROI Hesaplaması</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="text-center p-4 bg-red-50 rounded-lg">
+                          <div className="text-2xl font-bold text-red-600">₺115K</div>
+                          <div className="text-sm text-red-700">Önceki Ortalama</div>
                         </div>
-                        <div>
-                          <div className="text-2xl font-bold text-blue-700">+28%</div>
-                          <div className="text-blue-600">Doluluk Oranı</div>
+                        <div className="text-center p-4 bg-green-50 rounded-lg">
+                          <div className="text-2xl font-bold text-green-600">₺170K</div>
+                          <div className="text-sm text-green-700">Mevcut Ortalama</div>
                         </div>
                       </div>
-                    </CardContent>
-                  </Card>
 
-                  <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
-                    <CardContent className="p-6">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
-                          <Star className="w-6 h-6 text-white" />
+                      <div className="border-t pt-4">
+                        <div className="flex justify-between items-center mb-2">
+                          <span>Aylık Artış:</span>
+                          <span className="font-bold text-green-600">+₺55K</span>
                         </div>
-                        <div>
-                          <div className="text-2xl font-bold text-purple-700">+1.2</div>
-                          <div className="text-purple-600">Ortalama Puan</div>
+                        <div className="flex justify-between items-center mb-2">
+                          <span>Yıllık Artış:</span>
+                          <span className="font-bold text-green-600">+₺660K</span>
+                        </div>
+                        <div className="flex justify-between items-center mb-4">
+                          <span>Platform Maliyeti:</span>
+                          <span className="text-red-600">-₺96K/yıl</span>
+                        </div>
+                        <div className="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-lg">
+                          <div className="flex justify-between items-center">
+                            <span className="font-bold">Net ROI:</span>
+                            <span className="text-2xl font-bold text-green-600">+₺564K</span>
+                          </div>
+                          <div className="text-center mt-2">
+                            <Badge className="bg-green-600">%590 Yatırım Getirisi</Badge>
+                          </div>
                         </div>
                       </div>
                     </CardContent>
@@ -770,48 +796,45 @@ const HotelCommentsApp = () => {
               <TabsContent value="reviews" className="space-y-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Örnek Yorumlar</CardTitle>
-                    <CardDescription>AI ile analiz edilmiş gerçek müşteri yorumları</CardDescription>
+                    <CardTitle>Son Yorumlar</CardTitle>
+                    <CardDescription>AI analizi ile kategorize edilmiş gerçek yorumlar</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
                       {demoData.map((review, index) => (
-                        <div key={index} className="border rounded-lg p-4 space-y-3 hover:shadow-md transition-shadow">
-                          <div className="flex justify-between items-start">
-                            <div className="flex items-center space-x-2">
-                              <Badge variant="outline">{review.Platform}</Badge>
-                              <Badge variant="outline">{review.Company}</Badge>
-                              <Badge
-                                variant={
-                                  review.Sentiment === "Positive"
-                                    ? "default"
-                                    : review.Sentiment === "Negative"
-                                      ? "destructive"
-                                      : "secondary"
-                                }
-                              >
-                                {review.Sentiment === "Positive"
-                                  ? "😊 Pozitif"
-                                  : review.Sentiment === "Negative"
-                                    ? "😞 Negatif"
-                                    : "😐 Nötr"}
-                              </Badge>
+                        <div key={index} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
+                          <div className="flex justify-between items-start mb-3">
+                            <div className="flex items-center space-x-3">
+                              <Avatar className="w-10 h-10">
+                                <AvatarFallback>{review.User.slice(0, 2)}</AvatarFallback>
+                              </Avatar>
+                              <div>
+                                <div className="font-medium">{review.User}</div>
+                                <div className="text-sm text-gray-500">{review.Platform} • {review.CommentDate}</div>
+                              </div>
                             </div>
-                            <div className="flex items-center space-x-1">
-                              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                              <span className="text-sm font-medium">{review.UserScore}/10</span>
+                            <div className="flex items-center space-x-2">
+                              <Badge
+                                variant={review.Sentiment === "Positive" ? "default" : "destructive"}
+                                className={review.Sentiment === "Positive" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}
+                              >
+                                {review.Sentiment === "Positive" ? "😊 Pozitif" : "😞 Negatif"}
+                              </Badge>
+                              <div className="flex items-center">
+                                <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                                <span className="ml-1 font-medium">{review.UserScore}</span>
+                              </div>
                             </div>
                           </div>
-                          <p className="text-sm text-gray-700 line-clamp-3">{review.ReviewText}</p>
-                          <div className="flex flex-wrap gap-1">
-                            {review.ReasonDepartment.split(", ").map((dept, idx) => (
-                              <Badge key={idx} variant="secondary" className="text-xs">
+
+                          <p className="text-gray-700 mb-3 leading-relaxed">{review.ReviewText}</p>
+
+                          <div className="flex flex-wrap gap-2">
+                            {review.ReasonDepartment.split(", ").map((dept, i) => (
+                              <Badge key={i} variant="outline" className="text-xs">
                                 {dept}
                               </Badge>
                             ))}
-                          </div>
-                          <div className="text-xs text-gray-500">
-                            {review.User} • {review.CommentDate}
                           </div>
                         </div>
                       ))}
@@ -844,7 +867,7 @@ const HotelCommentsApp = () => {
               </Badge>
             </div>
             <nav className="hidden md:flex space-x-6">
-              <Button variant="ghost" onClick={() => setShowDemo(true)}>
+              <Button variant="ghost" onClick={openDemo}>
                 <PlayCircle className="w-4 h-4 mr-2" />
                 Demo
               </Button>
@@ -920,7 +943,7 @@ const HotelCommentsApp = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Button
               size="lg"
-              onClick={() => setShowDemo(true)}
+              onClick={openDemo}
               className="px-8 py-6 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-full font-semibold transition-all transform hover:scale-105 shadow-xl text-lg"
             >
               <PlayCircle className="w-6 h-6 mr-2" />🎯 Ücretsiz Demo İzle
@@ -1156,7 +1179,7 @@ const HotelCommentsApp = () => {
           <div className="text-center">
             <Button
               size="lg"
-              onClick={() => setShowDemo(true)}
+              onClick={openDemo}
               className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-8 py-4 text-lg"
             >
               <Eye className="w-5 h-5 mr-2" />🚀 Detaylı Demo İzle - Ücretsiz
@@ -1318,7 +1341,7 @@ const HotelCommentsApp = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
-              onClick={() => setShowDemo(true)}
+              onClick={openDemo}
               className="px-8 py-4 bg-white text-blue-600 hover:bg-gray-100 rounded-full font-semibold text-lg"
             >
               <PlayCircle className="w-6 h-6 mr-2" />
