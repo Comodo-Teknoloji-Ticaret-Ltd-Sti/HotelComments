@@ -1,0 +1,38 @@
+[
+    {
+        "id": 29,
+        "Platform": "Google",
+        "Company": "Otel5",
+        "User": "ERHAN TEZEL",
+        "ReviewText": "Küçük çocuğumuz olduğu için tercih ettik. Dezavantajları; 1-Sessiz ve manzaralı bir oda talep etmemize rağmen 1101 nolu oda verildi...",
+        "Sentiment": "Negative",
+        "ReasonDepartment": "Oda, Hizmet, Genel",
+        "UserScore": 4,
+        "GeneralScore": 8.4,
+        "CommentDate": "2025-07-11"
+    },
+    {
+        "id": 32,
+        "Platform": "Google",
+        "Company": "Otel5",
+        "User": "Ares Ceferov",
+        "ReviewText": "Bu otelde geçirdiğimiz tatil beklentimizin çok üzerindeydi. Girişten itibaren personeller güleryüzlüydü. Havuz temiz ve güzeldi.",
+        "Sentiment": "Positive",
+        "ReasonDepartment": "Personel, Temizlik",
+        "UserScore": 10,
+        "GeneralScore": 8.4,
+        "CommentDate": "2025-07-11"
+    },
+    {
+        "id": 30,
+        "Platform": "Google",
+        "Company": "Otel5",
+        "User": "Fatmir Koci",
+        "ReviewText": "Eşimle ilk kez bu tesise geldim. Gelir gelmez çok sıcak bir karşılamayla karşılaştık...",
+        "Sentiment": "Positive",
+        "ReasonDepartment": "Resepsiyon, Personel, Hizmet, Genel",
+        "UserScore": 10,
+        "GeneralScore": 8.4,
+        "CommentDate": "2025-07-10"
+    }
+]
